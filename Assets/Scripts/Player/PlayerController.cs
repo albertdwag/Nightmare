@@ -5,9 +5,9 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private InputManager inputManager;
+    [SerializeField] private SOPlayerSetup _playerSetup;
     [SerializeField] private HealthController healthController;
     private Vector3 playerVelocity;
-    private readonly float playerSpeed = 2.0f;
     private readonly float gravityValue = -9.81f;
     private Transform cameraTransform;
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new(movement.x, 0f, movement.y);
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
 
-        controller.Move(playerSpeed * Time.deltaTime * move);
+        controller.Move(_playerSetup.playerSpeed * Time.deltaTime * move);
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
