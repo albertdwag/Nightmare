@@ -12,6 +12,7 @@ public class EnemyBaseController : MonoBehaviour
     {
         healthController.OnDeath += Die;
         healthController = GetComponent<HealthController>();
+        healthController.StartLife = _enemySetup.life;
     }
 
     private void Update()

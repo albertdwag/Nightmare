@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         healthController.OnDeath += Die;
+        healthController.OnDamage += Damage;
+        healthController.StartLife = _playerSetup.life;
     }
 
     private void Start()
@@ -39,6 +41,11 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    private void Damage(HealthController healthController)
+    {
+
     }
 
     private void Die(HealthController healthController)
