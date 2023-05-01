@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 442795768}
   - component: {fileID: 442795770}
   - component: {fileID: 442795769}
+  - component: {fileID: 442795771}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -248,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3320da6b302701a46854dbcb42808fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthController: {fileID: 0}
 --- !u!143 &442795770
 CharacterController:
   m_ObjectHideFlags: 0
@@ -266,6 +268,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &442795771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442795767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3afd5098fefecd4f91938cba9c290e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentLife: 0
 --- !u!1 &549386796
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +293,7 @@ GameObject:
   - component: {fileID: 549386800}
   - component: {fileID: 549386799}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557792588}
   m_Layer: 0
-  m_Name: Camera Pivot
+  m_Name: Camera Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,7 +573,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.04, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
