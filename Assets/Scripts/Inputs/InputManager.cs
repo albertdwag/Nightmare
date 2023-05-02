@@ -2,23 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : Singleton<InputManager>
 {
-    public static InputManager Instance
-    {
-        get { return _instance; }
-    }
-
     private PlayerControls playerControls;
-    private static InputManager _instance;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance != null && _instance != this)
-            Destroy(this);
-        else
-            _instance = this;
-
+        base.Awake();
         playerControls = new PlayerControls();
     }
 
