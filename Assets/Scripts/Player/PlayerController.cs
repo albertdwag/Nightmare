@@ -3,10 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : Singleton<PlayerController>
 {
+    public HealthController HealthController
+    {
+        get { return _healthController; }
+    }
+
     private CharacterController controller;
     private InputManager inputManager;
     [SerializeField] private SOPlayerSetup _playerSetup;
-    [SerializeField] private HealthController healthController;
+    [SerializeField] private HealthController _healthController;
     private Vector3 playerVelocity;
     private readonly float gravityValue = -9.81f;
     private Transform cameraTransform;
@@ -14,16 +19,16 @@ public class PlayerController : Singleton<PlayerController>
     protected override void Awake()
     {
         base.Awake();
-        healthController.OnDeath += Die;
-        healthController.OnDamage += Damage;
-        healthController.StartLife = _playerSetup.life;
+        _healthController.OnDeath += Die;
+        _healthController.OnDamage += Damage;
+        _healthController.StartLife = _playerSetup.life;
     }
 
     private void Start()
     {
         inputManager = InputManager.Instance;
         controller = GetComponent<CharacterController>();
-        healthController = GetComponent<HealthController>();
+        _healthController = GetComponent<HealthController>();
         cameraTransform = Camera.main.transform;
     }
 
@@ -44,7 +49,7 @@ public class PlayerController : Singleton<PlayerController>
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    private void Damage(HealthController healthController)
+    public void Damage(HealthController healthController)
     {
 
     }

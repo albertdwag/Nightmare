@@ -31,6 +31,7 @@ public class HealthController : MonoBehaviour, IDamageable
         UpdateLife();
         OnDamage?.Invoke(this);
     }
+
     private void Die()
     {
         OnDeath?.Invoke(this);
