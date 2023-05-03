@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class EnemyBaseController : MonoBehaviour
 {
-    public GameObject target;
+    public PlayerController target;
     [SerializeField] private SOEnemySetup _enemySetup;
     [SerializeField] private HealthController healthController;
-    private string attackTag = "AttackRange";
+    private readonly string attackTag = "AttackRange";
+    private readonly string followTag = "FollowRange";
+    private bool canMove = false;
 
     private void Awake()
     {
+        target = PlayerController.Instance;
         healthController.OnDeath += Die;
         healthController = GetComponent<HealthController>();
         healthController.StartLife = _enemySetup.life;
@@ -22,13 +25,31 @@ public class EnemyBaseController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag(attackTag))
+        {
+            canMove = false;
             Attack();
+        }
+
+        if (other.transform.CompareTag(followTag))
+            canMove = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag(attackTag))
+            canMove = true;
+
+        if (other.transform.CompareTag(followTag))
+            canMove = false;
     }
 
     private void HandleMovement()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, _enemySetup.enemySpeed * Time.deltaTime);
-        transform.LookAt(target.transform);
+        if (canMove)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, _enemySetup.enemySpeed * Time.deltaTime);
+            transform.LookAt(target.transform);
+        }
     }
 
     private void Attack()
