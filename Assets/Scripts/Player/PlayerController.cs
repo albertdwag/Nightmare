@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
     private InputManager inputManager;
@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
     private readonly float gravityValue = -9.81f;
     private Transform cameraTransform;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         healthController.OnDeath += Die;
         healthController.OnDamage += Damage;
         healthController.StartLife = _playerSetup.life;

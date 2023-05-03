@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour, IDamageable
 {
+    public UiUpdater uiUpdater;
     public Action<HealthController> OnDeath;
     public Action<HealthController> OnDamage;
+
     public float StartLife
     {
         get { return _startLife; }
@@ -26,6 +28,7 @@ public class HealthController : MonoBehaviour, IDamageable
         if (_currentLife <= 0)
             Die();
 
+        UpdateLife();
         OnDamage?.Invoke(this);
     }
     private void Die()
@@ -33,11 +36,17 @@ public class HealthController : MonoBehaviour, IDamageable
         OnDeath?.Invoke(this);
     }
 
+    private void UpdateLife()
+    {
+        if (uiUpdater != null)
+            uiUpdater.UpdateValue(_currentLife);
+    }
+
     #region DEBUG
     [NaughtyAttributes.Button]
     private void Damage()
     {
-        Damage(100);
+        Damage(2);
     }
     #endregion
 }
