@@ -30,6 +30,7 @@ public class PlayerController : Singleton<PlayerController>
         controller = GetComponent<CharacterController>();
         _healthController = GetComponent<HealthController>();
         cameraTransform = Camera.main.transform;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
