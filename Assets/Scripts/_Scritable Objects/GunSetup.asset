@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: GunSetup
   m_EditorClassIdentifier: 
   range: 100
-  _maxAmmo: 7
-  _currentAmmo: 0
+  damage: 10
+  maxAmmo: 99
+  currentAmmo: 0

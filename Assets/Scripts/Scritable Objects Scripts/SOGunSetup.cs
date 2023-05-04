@@ -4,6 +4,7 @@ using UnityEngine;
 public class SOGunSetup : ScriptableObject
 {
     public float range = 100f;
-    public int _maxAmmo = 7;
-    public int _currentAmmo;
+    public float damage = 10f;
+    public int maxAmmo = 7;
+    public int currentAmmo;
 }

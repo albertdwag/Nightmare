@@ -11,10 +11,14 @@ public class EnemyBaseController : MonoBehaviour
 
     private void Awake()
     {
-        target = PlayerController.Instance;
         healthController.OnDeath += Die;
         healthController = GetComponent<HealthController>();
         healthController.StartLife = _enemySetup.life;
+    }
+
+    private void Start()
+    {
+        target = PlayerController.Instance;
     }
 
     private void Update()
@@ -59,6 +63,6 @@ public class EnemyBaseController : MonoBehaviour
 
     private void Die(HealthController healthController)
     {
-
+        Destroy(gameObject);
     }
 }

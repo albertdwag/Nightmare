@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9e8e2852da9294fb0fe350254e2b90, type: 3}
   m_Name: EnemySetup
   m_EditorClassIdentifier: 
-  enemySpeed: 1.5
+  life: 15
+  enemySpeed: 1
+  attackDamage: 2

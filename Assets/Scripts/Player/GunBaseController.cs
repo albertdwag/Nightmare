@@ -6,36 +6,39 @@ public class GunBaseController : MonoBehaviour
 {
     [SerializeField] private SOGunSetup _gunSetup;
     [SerializeField] private UiUpdater _uiUpdater;
+    public LayerMask layerMask;
 
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && _gunSetup._currentAmmo != 0)
-        {
+        if (Input.GetMouseButtonDown(0) && _gunSetup.currentAmmo != 0)
             Shoot();
-            _gunSetup._currentAmmo--;
-            UpdateAmmo();
-        }
     }
 
-    private void Start()
+    private void Awake()
     {
-        _gunSetup._currentAmmo = _gunSetup._maxAmmo;
+        _gunSetup.currentAmmo = _gunSetup.maxAmmo;
+        UpdateAmmo();
     }
 
     public void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, _gunSetup.range))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, _gunSetup.range, layerMask))
         {
+            var hitObject = hit.transform.GetComponent<HealthController>();
+            hitObject.Damage(_gunSetup.damage);
             Debug.Log("Hit object: " + hit.transform.name);
         }
-        Debug.DrawRay(transform.position, transform.forward * _gunSetup.range, Color.green, 0.1f);
+
+        _gunSetup.currentAmmo--;
+        UpdateAmmo(); 
+        Debug.DrawRay(transform.position, transform.forward * _gunSetup.range, Color.green, 0.1f); 
     }
 
     private void UpdateAmmo()
     {
         if (_uiUpdater != null)
-            _uiUpdater.UpdateValue(_gunSetup._currentAmmo);
+            _uiUpdater.UpdateValue(_gunSetup.currentAmmo);
     }
 }
