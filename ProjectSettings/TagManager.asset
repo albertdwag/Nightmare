@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AttackRange
   - FollowRange
+  - Enemy
   layers:
   - Default
   - TransparentFX
