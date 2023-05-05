@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class EnemyBaseController : MonoBehaviour
 {
-    public PlayerController target;
     [SerializeField] private SOEnemySetup _enemySetup;
     [SerializeField] private HealthController healthController;
+    [SerializeField] public EnemyGenerator enemyGenerator;
+    private PlayerController _target;
+    private bool canMove = false;
     private readonly string attackTag = "AttackRange";
     private readonly string followTag = "FollowRange";
-    private bool canMove = false;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class EnemyBaseController : MonoBehaviour
 
     private void Start()
     {
-        target = PlayerController.Instance;
+        _target = PlayerController.Instance;
     }
 
     private void Update()
@@ -51,8 +52,8 @@ public class EnemyBaseController : MonoBehaviour
     {
         if (canMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, _enemySetup.enemySpeed * Time.deltaTime);
-            transform.LookAt(target.transform);
+            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _enemySetup.enemySpeed * Time.deltaTime);
+            transform.LookAt(_target.transform);
         }
     }
 
@@ -63,6 +64,7 @@ public class EnemyBaseController : MonoBehaviour
 
     private void Die(HealthController healthController)
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        enemyGenerator.OnEnemyDestroyed();
     }
 }
