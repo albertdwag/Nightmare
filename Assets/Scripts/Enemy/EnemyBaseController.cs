@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class EnemyBaseController : MonoBehaviour
 {
+    public EnemyGenerator enemyGenerator;
+
     [SerializeField] private SOEnemySetup _enemySetup;
     [SerializeField] private HealthController healthController;
-    [SerializeField] public EnemyGenerator enemyGenerator;
     private PlayerController _target;
     private bool canMove = false;
     private readonly string attackTag = "AttackRange";
@@ -66,5 +67,11 @@ public class EnemyBaseController : MonoBehaviour
     {
         gameObject.SetActive(false);
         enemyGenerator.OnEnemyDestroyed();
+        ResetLife();
+    }
+
+    private void ResetLife()
+    {
+        healthController.CurrentLife = _enemySetup.life;
     }
 }

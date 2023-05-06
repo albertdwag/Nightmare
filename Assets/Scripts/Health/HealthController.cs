@@ -13,6 +13,11 @@ public class HealthController : MonoBehaviour, IDamageable
         set { _startLife = value; }
     }
 
+    public float CurrentLife
+    {
+        set { _currentLife = value; }
+    }
+
     private float _startLife;
     [SerializeField] private float _currentLife;
 

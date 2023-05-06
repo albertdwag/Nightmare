@@ -4,22 +4,37 @@ using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    public int maxEnemies = 10;
+    public int maxEnemies = 3;
     public float spawnRate = 1.0f;
     public float enemySpacing = 2.0f;
 
-    private int currentEnemies = 0;
+    private static int currentEnemies = 0;
+    private string spawnableTag = "SpawnRange";
+    private bool canSpawnEnemies = false;
 
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(SpawnEnemy());
+        if (other.transform.CompareTag(spawnableTag))
+        {
+            canSpawnEnemies = true;
+            StartCoroutine(SpawnEnemy());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag(spawnableTag))
+        {
+            canSpawnEnemies = false;
+            StopCoroutine(SpawnEnemy());
+        }
     }
 
     private IEnumerator SpawnEnemy()
     {
-        while (true)
+        while (canSpawnEnemies)
         {
-            if (currentEnemies < maxEnemies)
+            if (currentEnemies <= maxEnemies)
             {
                 GameObject enemy = EnemyPoolManager.Instance.GetEnemyFromPool();
                 if (enemy != null)
@@ -28,6 +43,7 @@ public class EnemyGenerator : MonoBehaviour
                     enemy.SetActive(true);
                     var controller = enemy.GetComponent<EnemyBaseController>();
                     controller.enemyGenerator = this;
+                    currentEnemies++;
                 }
             }
             yield return new WaitForSeconds(spawnRate);

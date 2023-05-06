@@ -23,8 +23,7 @@ public class GunBaseController : MonoBehaviour
 
     public void Shoot()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, _gunSetup.range, layerMask))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _gunSetup.range, layerMask))
         {
             var hitObject = hit.transform.GetComponent<HealthController>();
             hitObject.Damage(_gunSetup.damage);
