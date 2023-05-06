@@ -6,21 +6,23 @@ public class EnemyBaseController : MonoBehaviour
 
     [SerializeField] private SOEnemySetup _enemySetup;
     [SerializeField] private HealthController healthController;
+    [SerializeField] private UnityEngine.AI.NavMeshAgent enemyAI;
     private PlayerController _target;
     private bool canMove = false;
     private readonly string attackTag = "AttackRange";
-    private readonly string followTag = "FollowRange";
 
     private void Awake()
     {
-        healthController.OnDeath += Die;
         healthController = GetComponent<HealthController>();
+        enemyAI = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        healthController.OnDeath += Die;
         healthController.StartLife = _enemySetup.life;
     }
 
     private void Start()
     {
         _target = PlayerController.Instance;
+        enemyAI.speed = _enemySetup.enemySpeed;
     }
 
     private void Update()
@@ -35,27 +37,20 @@ public class EnemyBaseController : MonoBehaviour
             canMove = false;
             Attack();
         }
-
-        if (other.transform.CompareTag(followTag))
-            canMove = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.CompareTag(attackTag))
             canMove = true;
-
-        if (other.transform.CompareTag(followTag))
-            canMove = false;
     }
 
     private void HandleMovement()
     {
         if (canMove)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _enemySetup.enemySpeed * Time.deltaTime);
-            transform.LookAt(_target.transform);
-        }
+            enemyAI.SetDestination(_target.transform.position);
+        else
+            enemyAI.SetDestination(Vector3.zero);
     }
 
     private void Attack()
