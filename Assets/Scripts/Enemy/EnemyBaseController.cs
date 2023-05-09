@@ -61,6 +61,7 @@ public class EnemyBaseController : MonoBehaviour
         gameObject.SetActive(false);
         enemyGenerator.OnEnemyDestroyed();
         ResetLife();
+        canMove = true;
     }
 
     private void ResetLife()

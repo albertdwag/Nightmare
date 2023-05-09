@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 100
   damage: 10
-  maxAmmo: 99
-  currentAmmo: 0
+  maxAmmo: 7
+  currentAmmo: 5

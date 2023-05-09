@@ -1816,6 +1816,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 782628376}
     m_Modifications:
+    - target: {fileID: 4440062877827168372, guid: 214ecbd785b1f374faedb6c7a54b7990, type: 3}
+      propertyPath: spawnRate
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440062877827168372, guid: 214ecbd785b1f374faedb6c7a54b7990, type: 3}
+      propertyPath: maxEnemies
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4440062877827168373, guid: 214ecbd785b1f374faedb6c7a54b7990, type: 3}
       propertyPath: m_RootOrder
       value: 0

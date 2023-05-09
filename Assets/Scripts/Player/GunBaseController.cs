@@ -9,11 +9,14 @@ public class GunBaseController : MonoBehaviour
 
     [SerializeField] private SOGunSetup _gunSetup;
     [SerializeField] private UiUpdater _uiUpdater;
+    private string handTag = "Hand";
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && _gunSetup.currentAmmo != 0)
+        if (Input.GetMouseButtonDown(0) && _gunSetup.currentAmmo != 0 && transform.parent.CompareTag(handTag))
             Shoot();
+        if (Input.GetKeyDown(KeyCode.R))
+            Reload();
     }
 
     private void Awake()
@@ -40,5 +43,11 @@ public class GunBaseController : MonoBehaviour
     {
         if (_uiUpdater != null)
             _uiUpdater.UpdateValue(_gunSetup.currentAmmo);
+    }
+
+    private void Reload()
+    {
+        _gunSetup.currentAmmo = _gunSetup.maxAmmo;
+        UpdateAmmo();
     }
 }

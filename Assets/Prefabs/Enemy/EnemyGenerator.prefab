@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8397386d6f2bf3e4c976dad4f2c6fd7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 4
-  spawnRate: 10
+  maxEnemies: 10
+  spawnRate: 4
   enemySpacing: 2
 --- !u!54 &7591803392764631868
 Rigidbody:
