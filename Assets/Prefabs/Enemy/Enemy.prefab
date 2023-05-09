@@ -51,6 +51,7 @@ MonoBehaviour:
   enemyGenerator: {fileID: 0}
   _enemySetup: {fileID: 11400000, guid: 2e3d70a016e028b4284ebe00745f7de5, type: 2}
   healthController: {fileID: 5417121293672719314}
+  enemyAI: {fileID: 0}
 --- !u!114 &5417121293672719314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: eb8e4734d76d7d44da89506dd685cad4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -8,7 +8,7 @@ public class EnemyBaseController : MonoBehaviour
     [SerializeField] private HealthController healthController;
     [SerializeField] private UnityEngine.AI.NavMeshAgent enemyAI;
     private PlayerController _target;
-    private bool canMove = false;
+    private bool canMove = true;
     private readonly string attackTag = "AttackRange";
 
     private void Awake()
@@ -49,8 +49,6 @@ public class EnemyBaseController : MonoBehaviour
     {
         if (canMove)
             enemyAI.SetDestination(_target.transform.position);
-        else
-            enemyAI.SetDestination(Vector3.zero);
     }
 
     private void Attack()

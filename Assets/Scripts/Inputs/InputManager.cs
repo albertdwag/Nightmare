@@ -25,6 +25,7 @@ public class InputManager : Singleton<InputManager>
     {
         return playerControls.Player.Movement.ReadValue<Vector2>();
     }
+
     public Vector2 GetMouseDelta()
     {
         return playerControls.Player.Look.ReadValue<Vector2>();

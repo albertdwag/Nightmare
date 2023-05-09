@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GunBaseController : MonoBehaviour
 {
-    [SerializeField] private SOGunSetup _gunSetup;
-    [SerializeField] private UiUpdater _uiUpdater;
+    public Transform aim;
     public LayerMask layerMask;
 
+    [SerializeField] private SOGunSetup _gunSetup;
+    [SerializeField] private UiUpdater _uiUpdater;
 
     private void Update()
     {
@@ -23,7 +24,7 @@ public class GunBaseController : MonoBehaviour
 
     public void Shoot()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _gunSetup.range, layerMask))
+        if (Physics.Raycast(aim.transform.position, aim.transform.forward, out RaycastHit hit, _gunSetup.range, layerMask))
         {
             var hitObject = hit.transform.GetComponent<HealthController>();
             hitObject.Damage(_gunSetup.damage);
@@ -32,7 +33,7 @@ public class GunBaseController : MonoBehaviour
 
         _gunSetup.currentAmmo--;
         UpdateAmmo(); 
-        Debug.DrawRay(transform.position, transform.forward * _gunSetup.range, Color.green, 0.1f); 
+        Debug.DrawRay(aim.transform.position, aim.transform.forward * _gunSetup.range, Color.green, 0.1f); 
     }
 
     private void UpdateAmmo()
