@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GunBaseController : MonoBehaviour
 {
     public Transform aim;
     public LayerMask layerMask;
+    public Action<GunBaseController> OnSwapWeapon;
 
     [SerializeField] private SOGunSetup _gunSetup;
     [SerializeField] private UiUpdater _uiUpdater;
@@ -13,7 +13,7 @@ public class GunBaseController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && _gunSetup.currentAmmo != 0 && transform.parent.CompareTag(handTag))
+        if (Input.GetMouseButtonDown(0) && _gunSetup.currentAmmo > 0 && transform.parent.CompareTag(handTag))
             Shoot();
         if (Input.GetKeyDown(KeyCode.R))
             Reload();
@@ -25,7 +25,7 @@ public class GunBaseController : MonoBehaviour
         UpdateAmmo();
     }
 
-    public void Shoot()
+    protected virtual void Shoot()
     {
         if (Physics.Raycast(aim.transform.position, aim.transform.forward, out RaycastHit hit, _gunSetup.range, layerMask))
         {
@@ -39,7 +39,7 @@ public class GunBaseController : MonoBehaviour
         Debug.DrawRay(aim.transform.position, aim.transform.forward * _gunSetup.range, Color.green, 0.1f); 
     }
 
-    private void UpdateAmmo()
+    public void UpdateAmmo()
     {
         if (_uiUpdater != null)
             _uiUpdater.UpdateValue(_gunSetup.currentAmmo);

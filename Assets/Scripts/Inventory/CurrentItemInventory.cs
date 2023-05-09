@@ -4,10 +4,16 @@ public class CurrentItemInventory : MonoBehaviour
 {
     private GameObject currentItem = null;
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             SelectItem(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            SelectItem(1);
 
         if (currentItem != null)
         {
@@ -28,5 +34,6 @@ public class CurrentItemInventory : MonoBehaviour
 
         currentItem = Inventory.Instance.items[index];
         currentItem.SetActive(true);
+        currentItem.GetComponent<GunBaseController>().UpdateAmmo();
     }
 }
